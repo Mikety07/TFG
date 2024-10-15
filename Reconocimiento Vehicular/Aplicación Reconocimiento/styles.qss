@@ -1,0 +1,92 @@
+/* styles.qss */
+
+/* General Widget Styling */
+QWidget {
+    background-color: #f7f9fc;  /* Light pastel blue background */
+    color: #2e3b4e;  /* Darker text for better readability */
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* QLabel Styling */
+QLabel {
+    color: #4a5b6c;  /* Slightly lighter text color */
+}
+
+/* QLineEdit Styling */
+QLineEdit {
+    border: 1px solid #c0ccda;  /* Light border */
+    border-radius: 5px;
+    padding: 8px;
+    background-color: #ffffff;  /* White background */
+    font-size: 14px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #5c6bc0;  /* Blue border on focus */
+}
+
+/* QPushButton Styling */
+QPushButton {
+    background-color: #5c6bc0;  /* Pastel blue button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+QPushButton:hover {
+    background-color: #4e5aa7;  /* Slightly darker blue on hover */
+}
+
+QPushButton:pressed {
+    background-color: #3c488f;  /* Even darker blue on press */
+}
+
+/* QComboBox Styling */
+QComboBox {
+    border: 1px solid #c0ccda;  /* Light border */
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #ffffff;  /* White background */
+    font-size: 14px;
+}
+
+QComboBox QAbstractItemView {
+    border: 1px solid #c0ccda;  /* Border for the drop-down menu */
+    selection-background-color: #5c6bc0;  /* Background color for selected item */
+    selection-color: white;  /* Text color for selected item */
+}
+
+/* QScrollBar Styling */
+QScrollBar:horizontal {
+    border: 1px solid #c0ccda;
+    background: #f7f9fc;
+    height: 15px;
+    margin: 0px 20px 0 20px;
+}
+
+QScrollBar::handle:horizontal {
+    background: #5c6bc0;
+    min-width: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar:vertical {
+    border: 1px solid #c0ccda;
+    background: #f7f9fc;
+    width: 15px;
+    margin: 20px 0 20px 0;
+}
+
+QScrollBar::handle:vertical {
+    background: #5c6bc0;
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line {
+    background: none;
+    border: none;
+}

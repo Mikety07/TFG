@@ -1,0 +1,5 @@
+pip install easyocr
+pip install opencv-python
+pip install numpy
+pip install matplotlib
+pip install PyQt5
