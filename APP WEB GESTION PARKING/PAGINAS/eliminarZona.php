@@ -1,6 +1,6 @@
 <?php
 
-// Verificar si la sesión está iniciada y el usuario tiene el rol correcto
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -10,7 +10,7 @@ if ($_SESSION['rol'] != "administrador") {
     exit();
 }
 
-// Verificar si se ha proporcionado un ID de zona
+
 if (!isset($_GET['zona'])) {
     header('location: edificios.php');
     exit();
@@ -18,22 +18,22 @@ if (!isset($_GET['zona'])) {
 
 include_once "FUNCIONES/funciones.php";
 
-// Obtener el ID de la zona desde el parámetro GET
+
 $idZona = $_GET['zona'];
 
-// Inicializar variable para mensaje de confirmación
+
 $mensaje = '';
 
-// Verificar si se ha confirmado la eliminación
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['confirmar']) && $_POST['confirmar'] == 'si') {
-        // Conectar a la base de datos
+       
         $con = conectarBD();
 
-        // Preparar la consulta SQL para eliminar la zona
+      
         $sql = "DELETE FROM zona WHERE idZona = '$idZona'";
 
-        // Ejecutar la consulta y verificar si se eliminó correctamente
+      
         if (mysqli_query($con, $sql)) {
             $con->close();
             header('location: index.php?page=edificios');
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         $con->close();
     } else {
-        // Si no se confirma, redirigir a edificios.php
+      
         header('location: edificios.php');
         exit();
     }
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container mt-5">
     <h2 class="text-center mb-4">Eliminar Zona</h2>
 
-    <!-- Mensaje de advertencia -->
+  
     <?php if ($mensaje): ?>
         <?php echo $mensaje; ?>
     <?php else: ?>
