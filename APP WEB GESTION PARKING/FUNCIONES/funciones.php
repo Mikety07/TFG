@@ -353,14 +353,14 @@ function calcularImporteTicket($matricula)
   $entrada = $fila_consulta['entrada'];
   $entrada = new DateTime($entrada);
 
-  $salida = new DateTime(); // Hora y fecha actual
+  $salida = new DateTime(); 
 
-  // Calcular la diferencia de tiempo
+ 
   $interval = $entrada->diff($salida);
   $horas = $interval->h;
-  $horas += $interval->days * 24; // Añadir días completos como horas
+  $horas += $interval->days * 24; 
 
-  // Calcular el costo basado en la tabla de precios
+ 
   $costo = 0;
   if ($horas <= 1) {
       $costo = 2.00; // Tarifa básica por la primera hora
@@ -542,29 +542,28 @@ function obtenerRegistrosPendientesUsuario($idUsuario)
 }
 
 function obtenerCamaraPorZona($idZona) {
-  // Conectar a la base de datos
+  
   $con = conectarBD();
 
-  // Preparar la consulta para obtener la cámara asociada a la zona
+  
   $sql = "SELECT * FROM camara WHERE idZona = ?";
   $stmt = $con->prepare($sql);
   $stmt->bind_param('i', $idZona);
 
-  // Ejecutar la consulta
+
   $stmt->execute();
 
-  // Obtener el resultado
+
   $resultado = $stmt->get_result();
 
-  // Verificar si se encontró una cámara asociada a la zona
+  
   if ($resultado->num_rows > 0) {
-      // Devolver los datos de la cámara
       $camara = $resultado->fetch_assoc();
       $stmt->close();
       $con->close();
       return $camara;
   } else {
-      // Si no se encontró ninguna cámara, devolver null
+      
       $stmt->close();
       $con->close();
       return null;
@@ -572,29 +571,29 @@ function obtenerCamaraPorZona($idZona) {
 }
 
 function obtenerInfoCamara($idCamara) {
-  // Conectar a la base de datos
+
   $con = conectarBD();
 
-  // Preparar la consulta para obtener la información de la cámara
+
   $sql = "SELECT * FROM camara WHERE idCamara = ?";
   $stmt = $con->prepare($sql);
   $stmt->bind_param('i', $idCamara);
 
-  // Ejecutar la consulta
+
   $stmt->execute();
 
-  // Obtener el resultado
+
   $resultado = $stmt->get_result();
 
-  // Verificar si se encontró la cámara
+
   if ($resultado->num_rows > 0) {
-      // Devolver los datos de la cámara
+    
       $camara = $resultado->fetch_assoc();
       $stmt->close();
       $con->close();
       return $camara;
   } else {
-      // Si no se encontró la cámara, devolver null
+     
       $stmt->close();
       $con->close();
       return null;
