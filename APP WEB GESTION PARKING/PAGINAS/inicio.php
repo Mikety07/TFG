@@ -12,7 +12,7 @@ $_SESSION['ultimoAcceso'] = revisarTiempoSesion($_SESSION['usuario'],$_SESSION['
 
 if($_SESSION['rol'] == "administrador")
 {
-    // Conexión a la base de datos
+
     $dsn = 'mysql:host=localhost;dbname=parking;charset=utf8';
     $username = 'root';
     $password = '';
@@ -25,7 +25,7 @@ if($_SESSION['rol'] == "administrador")
         exit;
     }
 
-    // Consulta para obtener la ocupación por edificio y zona
+
     $sql = "
         SELECT e.nombre AS edificio, z.nombre AS zona, COUNT(rv.idRegistro) AS ocupacion, MAX(z.num_plazas) AS num_plazas
         FROM edificio e
@@ -67,19 +67,19 @@ if($_SESSION['rol'] == "administrador")
         <script>
             var ctx = document.getElementById('ocupacionChart').getContext('2d');
             var ocupacionChart = new Chart(ctx, {
-                type: 'bar', // Tipo de gráfico: 'bar' para barras
+                type: 'bar', 
                 data: {
-                    labels: <?php echo json_encode($edificios); ?>, // Nombres de las zonas
+                    labels: <?php echo json_encode($edificios); ?>, 
                     datasets: [{
                         label: 'Ocupación',
-                        data: <?php echo json_encode($ocupaciones); ?>, // Datos de ocupación
-                        backgroundColor: 'rgba(54, 162, 235, 0.6)', // Color de las barras de ocupación
+                        data: <?php echo json_encode($ocupaciones); ?>, 
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)', 
                         borderColor: 'rgba(54, 162, 235, 1)',
                         borderWidth: 1
                     }, {
                         label: 'Capacidad',
-                        data: <?php echo json_encode($capacidad); ?>, // Capacidad total de cada zona
-                        backgroundColor: 'rgba(255, 99, 132, 0.6)', // Color de las barras de capacidad
+                        data: <?php echo json_encode($capacidad); ?>,
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)', 
                         borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 1
                     }]
@@ -115,10 +115,10 @@ else if($_SESSION['rol']=="cliente")
 
         <div class="container mt-5">
             <h4 class="text-center mb-4"><?php echo "$nombreUsuario $apellidosUsuario, estos son tus tickets pendientes de pago:"; ?></h4>
-            <!-- Información del Edificio -->
+    
             <div class="card">
                 <div class="card-body d-flex">
-                    <!-- Tabla -->
+               
                     <table class="table table-bordered table-striped">
                         <thead class="thead-dark">
                             <tr>
