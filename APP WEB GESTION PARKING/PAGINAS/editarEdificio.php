@@ -1,6 +1,6 @@
 <?php
 
-// Verificar si la sesión está iniciada y el usuario tiene el rol correcto
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -10,7 +10,7 @@ if ($_SESSION['rol'] != "administrador") {
     exit();
 }
 
-// Verificar si se ha proporcionado un ID de edificio
+
 if (!isset($_GET['edificio'])) {
     header('location: index.php');
     exit();
@@ -18,25 +18,24 @@ if (!isset($_GET['edificio'])) {
 
 include_once "FUNCIONES/funciones.php";
 
-// Establecer la última hora de acceso de la sesión
+
 $_SESSION['ultimoAcceso'] = revisarTiempoSesion($_SESSION['usuario'], $_SESSION['ultimoAcceso']);
 
-// Obtener la información del edificio mediante su ID
+
 $idEdificio = $_GET['edificio'];
 $edificio = obtenerInfoEdificio($idEdificio);
 
-// Si se ha enviado el formulario, procesar la actualización
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recoger datos del formulario
+   
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $latitud = $_POST['latitud'];
     $longitud = $_POST['longitud'];
 
-    // Conectar a la base de datos
+
     $con = conectarBD();
 
-    // Actualizar la información del edificio
+ 
     $sql = "UPDATE edificio SET nombre = ?, descripcion = ?, latitud = ?, longitud = ? WHERE idEdificio = ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param('sssdi', $nombre, $descripcion, $latitud, $longitud, $idEdificio);
@@ -74,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container mt-5">
     <h2 class="text-center mb-4">Editar Información del Edificio</h2>
 
-    <!-- Contenedor con estilo para el formulario -->
+ 
     <div class="card-container">
         <form method="POST" action="">
             <div class="form-group">
@@ -102,13 +101,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <br><br>
 
-            <!-- Botón para abrir el modal de confirmación -->
+         
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Eliminar edificio</button>
         </form>
     </div>
 </div>
 
-<!-- Modal de confirmación de eliminación -->
+
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
