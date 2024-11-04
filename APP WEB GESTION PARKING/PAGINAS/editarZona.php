@@ -1,6 +1,5 @@
 <?php
 
-// Verificar si la sesión está iniciada y el usuario tiene el rol correcto
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -10,7 +9,7 @@ if ($_SESSION['rol'] != "administrador") {
     exit();
 }
 
-// Verificar si se ha proporcionado un ID de zona
+
 if (!isset($_GET['zona'])) {
     header('location: index.php');
     exit();
@@ -18,30 +17,28 @@ if (!isset($_GET['zona'])) {
 
 include_once "FUNCIONES/funciones.php";
 
-// Obtener el ID de la zona desde el parámetro GET
+
 $idZona = $_GET['zona'];
 
-// Inicializar variables para mensajes de éxito o error
+
 $mensaje = '';
 
-// Conectar a la base de datos
 $con = conectarBD();
 
-// Obtener los datos actuales de la zona
+
 $sql = "SELECT nombre, num_plazas FROM zona WHERE idZona = '$idZona'";
 $resultado = mysqli_query($con, $sql);
 $zona = mysqli_fetch_assoc($resultado);
 
-// Si se ha enviado el formulario, procesar la actualización de la zona
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recoger datos del formulario
+ 
     $nombreZona = $_POST['nombreZona'];
     $numPlazas = $_POST['numPlazas'];
 
-    // Preparar la consulta SQL para actualizar la zona
+ 
     $sql = "UPDATE zona SET nombre = '$nombreZona', num_plazas = '$numPlazas' WHERE idZona = '$idZona'";
 
-    // Ejecutar la consulta y verificar si se actualizó correctamente
     if (!mysqli_query($con, $sql)) {
         $mensaje = "<div class='alert alert-danger'>Hubo un error al actualizar la zona.</div>";
     } else {
@@ -49,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Cerrar la conexión a la base de datos
 $con->close();
 ?>
 
@@ -66,10 +62,10 @@ $con->close();
 <div class="container mt-5">
     <h2 class="text-center mb-4">Editar Zona</h2>
 
-    <!-- Mensaje de éxito o error -->
+  
     <?php echo $mensaje; ?>
 
-    <!-- Formulario para editar la zona -->
+ 
     <form method="POST" action="">
         <div class="form-group">
             <label for="nombreZona">Nombre de la Zona</label>
