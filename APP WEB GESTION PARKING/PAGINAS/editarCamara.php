@@ -1,6 +1,6 @@
 <?php
 
-// Verificar si la sesión está iniciada y el usuario tiene el rol correcto
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -10,7 +10,7 @@ if ($_SESSION['rol'] != "administrador") {
     exit();
 }
 
-// Verificar si se ha proporcionado un ID de cámara
+
 if (!isset($_GET['camara'])) {
     header('location: index.php');
     exit();
@@ -18,24 +18,24 @@ if (!isset($_GET['camara'])) {
 
 include_once "FUNCIONES/funciones.php";
 
-// Establecer la última hora de acceso de la sesión
+
 $_SESSION['ultimoAcceso'] = revisarTiempoSesion($_SESSION['usuario'], $_SESSION['ultimoAcceso']);
 
-// Obtener la información de la cámara mediante su ID
+
 $idCamara = $_GET['camara'];
 $camara = obtenerInfoCamara($idCamara);
 
-// Si se ha enviado el formulario, procesar la actualización
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Recoger datos del formulario
     $nombreCamara = $_POST['nombreCamara'];
     $descripcionCamara = $_POST['descripcionCamara'];
     $urlCamara = $_POST['urlCamara'];
 
-    // Conectar a la base de datos
+ 
     $con = conectarBD();
 
-    // Actualizar la información de la cámara
+
     $sql = "UPDATE camara SET nombre = ?, descripcion = ?, urlConexion = ? WHERE idCamara = ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param('sssi', $nombreCamara, $descripcionCamara, $urlCamara, $idCamara);
@@ -54,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container mt-5">
     <h2 class="text-center mb-4">Editar Información de la Cámara</h2>
 
-    <!-- Formulario para editar información de la cámara -->
     <form method="POST" action="">
         <div class="form-group">
             <label for="nombreCamara">Nombre de la Cámara</label>
