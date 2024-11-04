@@ -1,13 +1,13 @@
 import sys
 import cv2
 import easyocr
-import requests  # Asegúrate de instalar esta librería con pip install requests
+import requests  
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget, QLabel
 from PyQt5.QtCore import QTimer, QSize
 from PyQt5.QtGui import QImage, QPixmap
-from collections import Counter  # Para contar las matrículas
+from collections import Counter  
 
-# Modelo de OCR
+
 reader = easyocr.Reader(['en'])
 
 class MainWindow(QMainWindow):
@@ -16,12 +16,12 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Reconocimiento de Matrícula")
         self.setGeometry(100, 100, 800, 600)
         self.setup_ui()
-        self.capturas = []  # Lista para almacenar las matrículas detectadas
+        self.capturas = [] 
 
     def setup_ui(self):
         layout = QVBoxLayout()
 
-        # Botón verde redondo que diga "Pulse Aquí"
+       
         self.capture_button = QPushButton("Pulse Aquí")
         self.capture_button.setStyleSheet("""
             QPushButton {
@@ -38,16 +38,16 @@ class MainWindow(QMainWindow):
         self.capture_button.clicked.connect(self.capture_and_predict)
         layout.addWidget(self.capture_button)
 
-        # Área para mostrar el video de la webcam
+    
         self.video_label = QLabel()
         layout.addWidget(self.video_label)
 
-        # Label para mostrar la matrícula detectada
+     
         self.resultado_label = QLabel()
         self.resultado_label.setStyleSheet("font-size: 24px; color: blue;")
         layout.addWidget(self.resultado_label)
 
-        # Configuración de la cámara
+  
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
             print("Error: No se pudo abrir la cámara.")
@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
         self.timer.timeout.connect(self.display_video_stream)
         self.timer.start(30)
 
-        # Widget central
+     
         container = QWidget()
         container.setLayout(layout)
         self.setCentralWidget(container)
@@ -76,32 +76,32 @@ class MainWindow(QMainWindow):
         self.video_label.setScaledContents(True)
 
     def capture_and_predict(self):
-        self.capturas.clear()  # Limpiar las capturas anteriores
-        num_capturas = 10  # Número de capturas deseadas
+        self.capturas.clear()  
+        num_capturas = 10  
         for _ in range(num_capturas):
             ret, frame = self.cap.read()
             if ret:
-                # OCR para leer la matrícula
+          
                 ocr_results = reader.readtext(frame)
                 plate_text = " ".join([result[1] for result in ocr_results]).strip()
                 if plate_text:
-                    self.capturas.append(plate_text)  # Almacenar la matrícula detectada
+                    self.capturas.append(plate_text)  
                     print(f"Matrícula detectada: {plate_text}")
         
-        # Determinar la matrícula más común
+   
         if self.capturas:
             contador = Counter(self.capturas)
-            matricula_mas_comun, repeticiones = contador.most_common(1)[0]  # Obtener la matrícula más común
+            matricula_mas_comun, repeticiones = contador.most_common(1)[0]  
             self.resultado_label.setText(f"Matrícula detectada: {matricula_mas_comun} ")
 
-            # Si la matrícula se ha detectado al menos 3 veces, guardarla en la base de datos
+            
             if repeticiones >= 3:
                 self.save_plate_to_db(matricula_mas_comun)
         else:
             self.resultado_label.setText("Matrícula no detectada")
 
     def save_plate_to_db(self, plate_text):
-        url = "http://localhost/GestionParking/PAGINAS/guardar_matricula.php"  # Cambia la URL según sea necesario
+        url = "http://localhost/GestionParking/PAGINAS/guardar_matricula.php"  
         data = {'matricula': plate_text}
 
         try:
