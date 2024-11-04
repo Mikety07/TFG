@@ -50,9 +50,9 @@
 
     <?php
 
-            include_once "FUNCIONES/funciones.php"; //para poder usar las funciones
+            include_once "FUNCIONES/funciones.php"; 
 
-            //session_destroy();
+       
 
             if(!isset($_SESSION['usuario']))
             {
@@ -70,7 +70,7 @@
                         if(!isset($_SESSION))
                             session_start();
 
-                        //Relleno las variables de SESSION
+               
                         $_SESSION['usuario'] = obtenerIDUsuario($_POST['login_usuario']);
                         $_SESSION['email'] = $_POST['login_usuario']; 
                         $_SESSION['ultimoAcceso'] = date("Y-n-j H:i:s"); 
