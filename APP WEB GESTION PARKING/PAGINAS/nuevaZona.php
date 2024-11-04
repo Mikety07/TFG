@@ -1,6 +1,6 @@
 <?php
 
-// Verificar si la sesión está iniciada y el usuario tiene el rol correcto
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -10,7 +10,7 @@ if ($_SESSION['rol'] != "administrador") {
     exit();
 }
 
-// Verificar si se ha proporcionado un ID de edificio
+
 if (!isset($_GET['edificio'])) {
     header('location: index.php');
     exit();
@@ -18,32 +18,32 @@ if (!isset($_GET['edificio'])) {
 
 include_once "FUNCIONES/funciones.php";
 
-// Obtener el ID del edificio desde el parámetro GET
+
 $idEdificio = $_GET['edificio'];
 
-// Inicializar variables para mensajes de éxito o error
+
 $mensaje = '';
 
-// Si se ha enviado el formulario, procesar la inserción de la nueva zona
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recoger datos del formulario
+
     $nombreZona = $_POST['nombreZona'];
     $numeroPlazas = $_POST['numeroPlazas'];
 
-    // Conectar a la base de datos
+   
     $con = conectarBD();
 
-    // Preparar la consulta SQL para insertar la nueva zona
+
     $sql = "INSERT INTO zona (nombre, num_plazas, idEdificio) VALUES ('$nombreZona', '$numeroPlazas', '$idEdificio')";
 
-    // Ejecutar la consulta y verificar si se insertó correctamente
+
     if (!mysqli_query($con, $sql)) {
         $mensaje = "<div class='alert alert-danger'>Hubo un error al añadir la zona.</div>";
     } else {
         $mensaje = "<div class='alert alert-success'>Zona añadida correctamente.</div>";
     }
 
-    // Cerrar la conexión a la base de datos
+ 
     $con->close();
 }
 
@@ -62,10 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container mt-5">
     <h2 class="text-center mb-4">Añadir Nueva Zona</h2>
 
-    <!-- Mensaje de éxito o error -->
+
     <?php echo $mensaje; ?>
 
-    <!-- Formulario para añadir una nueva zona -->
+   
     <form method="POST" action="">
         <div class="form-group">
             <label for="nombreZona">Nombre de la Zona</label>
