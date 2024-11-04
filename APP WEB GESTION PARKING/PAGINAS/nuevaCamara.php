@@ -1,6 +1,6 @@
 <?php
 
-// Verificar si la sesión está iniciada y el usuario tiene el rol correcto
+
 if (!isset($_SESSION)) {
     session_start();
 }
@@ -10,7 +10,7 @@ if ($_SESSION['rol'] != "administrador") {
     exit();
 }
 
-// Verificar si se ha proporcionado un ID de edificio
+
 if (!isset($_GET['zona'])) {
     header('location: veredificios.php');
     exit();
@@ -18,26 +18,26 @@ if (!isset($_GET['zona'])) {
 
 include_once "FUNCIONES/funciones.php";
 
-// Obtener el ID del edificio desde el parámetro GET
+
 $idZona = $_GET['zona'];
 
-// Inicializar variables para mensajes de éxito o error
+
 $mensaje = '';
 
-// Procesar el formulario cuando se envía
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recoger datos del formulario según los campos de la cámara
+   
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $url = $_POST['url'];
 
-    // Conectar a la base de datos
+
     $con = conectarBD();
 
-    // Preparar la consulta SQL para insertar la nueva cámara
+
     $sql = "INSERT INTO camara (nombre, descripcion, urlConexion, idZona) VALUES ('$nombre', '$descripcion', '$url', '$idZona')";
 
-    // Ejecutar la consulta y verificar si se insertó correctamente
+
     if (mysqli_query($con, $sql)) {
         $con->close();
         header('location: index.php?page=edificios');
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mensaje = "<div class='alert alert-danger'>Hubo un error al añadir la cámara.</div>";
     }
 
-    // Cerrar la conexión a la base de datos
+
     $con->close();
 }
 
@@ -65,10 +65,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container mt-5">
     <h2 class="text-center mb-4">Añadir Nueva Cámara</h2>
 
-    <!-- Mensaje de éxito o error -->
+
     <?php echo $mensaje; ?>
 
-    <!-- Formulario para añadir una nueva cámara -->
     <form method="POST" action="">
         <div class="form-group">
             <label for="nombre">Nombre de la Cámara</label>
