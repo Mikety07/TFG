@@ -53,7 +53,7 @@ include_once "FUNCIONES/funciones.php";
     </div>
 </div>
 
-<!-- Modal ERROR-->
+
 <div class="modal fade" id="modalError" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -75,7 +75,7 @@ include_once "FUNCIONES/funciones.php";
 </div>
 
 
-<!-- Enlace a Bootstrap JS y dependencias -->
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -128,7 +128,7 @@ if(isset($_POST['nuevoCliente']))
 
         $idNuevoUsuario = obtenerIDUsuario($email);
 
-        // Captura de los datos de los vehículos
+  
         $matriculas = isset($_POST['matriculas']) ? $_POST['matriculas'] : [];
         $marcas = isset($_POST['marcas']) ? $_POST['marcas'] : [];
         $modelos = isset($_POST['modelos']) ? $_POST['modelos'] : [];
