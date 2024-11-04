@@ -96,7 +96,7 @@ if(isset($_POST['boton_siguiente']))
 {
     $value = comprobarMatriculaPago($_POST['matricula']);
 
-    if($value == 0) //No hay pendiente cerrar ninguna entrada de un vehículo con esta matrícula
+    if($value == 0) 
     {
         ?>
             <script type="text/javascript">
@@ -110,7 +110,7 @@ if(isset($_POST['boton_siguiente']))
     {
         $value = obtenerPropietarioMatricula($_POST['matricula']);
 
-        if($value==1) //No está asociado el vehículo a ningún propietario registrado
+        if($value==1) 
         {
             ?>
                 <script type="text/javascript">
